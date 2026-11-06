@@ -74,6 +74,14 @@ export function Hero() {
               <span className="h-2 w-2 animate-pulse-dot rounded-full bg-ok" />
               {profile.availability}
             </span>
+            <a
+              href="#travel"
+              className="glass inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3.5 py-1.5 text-[12.5px] font-medium text-emerald-400 transition hover:border-emerald-500 hover:bg-emerald-500/20 shadow-[0_0_15px_rgba(0,255,136,0.2)]"
+            >
+              <span>🇧🇩</span>
+              <span>Travel Map: 33/64 Districts</span>
+              <span className="rounded-full bg-emerald-400/20 px-1.5 py-0.5 font-mono text-[10px] font-bold text-emerald-300">52%</span>
+            </a>
             <span className="inline-flex items-center gap-1.5 font-mono text-[11.5px] text-faint">
               <MapPin size={13} aria-hidden /> {profile.location}
             </span>
@@ -104,6 +112,9 @@ export function Hero() {
             <ButtonLink href="#projects">
               View Projects
               <ArrowDownRight size={16} className="transition-transform duration-300 group-hover:rotate-[-45deg]" aria-hidden />
+            </ButtonLink>
+            <ButtonLink href="#travel" variant="secondary" className="border-emerald-500/40 text-emerald-400 hover:border-emerald-500 hover:bg-emerald-500/10">
+              <span className="inline-block" role="img" aria-label="Bangladesh flag">🇧🇩</span> Travel Map (33/64)
             </ButtonLink>
             <ButtonLink href={profile.resume} download={profile.resumeFileName} variant="secondary">
               <FileDown size={16} aria-hidden /> Download Resume

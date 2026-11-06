@@ -63,11 +63,14 @@ export function Navbar({ theme, onToggleTheme }: Props) {
                 <a
                   href={`#${l.id}`}
                   aria-current={active === l.id ? 'true' : undefined}
-                  className={`relative z-10 block rounded-full px-4 py-1.5 text-[13.5px] transition-colors ${
+                  className={`relative z-10 flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[13.5px] transition-colors ${
                     active === l.id ? 'text-ink' : 'text-muted hover:text-ink'
                   }`}
                 >
                   {l.label}
+                  {l.id === 'travel' && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#00FF88] shadow-[0_0_6px_#00FF88]" />
+                  )}
                 </a>
                 {active === l.id && (
                   <motion.span
@@ -140,7 +143,14 @@ export function Navbar({ theme, onToggleTheme }: Props) {
                       active === l.id ? 'bg-raised text-ink' : 'text-muted'
                     }`}
                   >
-                    {l.label}
+                    <span className="flex items-center gap-2">
+                      {l.label}
+                      {l.id === 'travel' && (
+                        <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[11px] font-bold text-[#00FF88]">
+                          33/64 🇧🇩
+                        </span>
+                      )}
+                    </span>
                     <span className="font-mono text-[11px] text-faint">0{i + 1}</span>
                   </a>
                 </motion.li>

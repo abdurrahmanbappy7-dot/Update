@@ -29,10 +29,10 @@ export default function App() {
         <Education />
         <Skills />
         <Projects />
+        <TravelMap />
         <Experience />
         <Leadership />
         <Photography />
-        <TravelMap />
         <Achievements />
         <Sports />
         <Contact />
