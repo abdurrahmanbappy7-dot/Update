@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────── Design tokens ───────── */
+:root,
+.dark {
+  --bg: 8 9 13;          /* #08090D */
+  --surface: 14 16 22;
+  --raised: 21 24 32;
+  --line: 236 240 247;   /* used with low alpha */
+  --ink: 236 240 247;
+  --muted: 139 148 166;
+  --faint: 84 92 110;
+  --accent: 61 139 255;  /* electric blue */
+  --cyan: 46 197 224;
+  --ok: 61 220 151;
+  color-scheme: dark;
+}
+
+.light {
+  --bg: 245 246 249;
+  --surface: 255 255 255;
+  --raised: 236 239 244;
+  --line: 12 14 20;
+  --ink: 12 14 20;
+  --muted: 82 90 106;
+  --faint: 140 148 164;
+  --accent: 22 94 224;
+  --cyan: 8 132 168;
+  --ok: 16 160 100;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    transition: background-color .4s ease, color .4s ease;
+  }
+  ::selection { background: rgb(var(--accent) / .35); color: rgb(var(--ink)); }
+  :focus-visible {
+    outline: 2px solid rgb(var(--cyan));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .shell { @apply mx-auto w-full max-w-shell px-5 sm:px-8; }
+
+  .hairline { border-color: rgb(var(--line) / .08); }
+  .light .hairline { border-color: rgb(var(--line) / .1); }
+
+  .glass {
+    background: rgb(var(--surface) / .55);
+    border: 1px solid rgb(var(--line) / .08);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+  .light .glass { background: rgb(var(--surface) / .7); border-color: rgb(var(--line) / .09); }
+
+  .card {
+    @apply relative rounded-2xl border;
+    background: linear-gradient(180deg, rgb(var(--surface)) 0%, rgb(var(--surface) / .6) 100%);
+    border-color: rgb(var(--line) / .08);
+  }
+  .light .card { background: rgb(var(--surface)); border-color: rgb(var(--line) / .09); box-shadow: 0 1px 2px rgb(12 14 20 / .04); }
+
+  .eyebrow { @apply font-mono text-[11px] uppercase tracking-[0.22em] text-cyan; }
+
+  .text-gradient {
+    background: linear-gradient(100deg, rgb(var(--ink)) 0%, rgb(var(--accent)) 55%, rgb(var(--cyan)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgb(var(--line) / .045) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / .045) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .field {
+    @apply w-full rounded-xl border bg-bg/60 px-4 py-3 text-[15px] text-ink placeholder:text-faint transition;
+    border-color: rgb(var(--line) / .1);
+  }
+  .field:hover { border-color: rgb(var(--line) / .18); }
+  .field:focus { outline: none; border-color: rgb(var(--accent) / .8); box-shadow: 0 0 0 4px rgb(var(--accent) / .14); }
+  .field[aria-invalid='true'] { border-color: rgb(244 98 98 / .8); }
+}
+
+/* Film grain overlay — fixed & non-interactive */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.light .grain { opacity: .025; }
